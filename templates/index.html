@@ -1,1 +1,130 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Веб ЛР1</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 
+</head>
+<body>
+    <!-- Шапка страницы -->
+    <header class="header">
+        <h1>Веб ЛР1</h1>
+        <div class="student-info">
+            ФИО: Ожеховский Александр Сергеевич | Группа: P3231 | Вариант: 466944
+        </div>
+    </header>
+
+    <!-- Основной контент -->
+    <div class="container">
+        <!-- Основная колонка - график и параметры -->
+        <section class="main-section">
+            <div class="graph-container">
+                <h2>Область попадания</h2>
+                <div class="graph" id="graph" style="width: 400px; height: 400px;">
+                    <div id="external" style="width: 100%; height: 100%;"></div>
+                </div>
+            </div>
+
+
+            <div class="parameters-section">
+                <h2>Параметры точки</h2>
+                <form id="pointForm">
+                    <!-- Параметр X - Select -->
+                    <div class="parameter-group">
+                        <label class="parameter-label">Координата X:</label>
+                        <select id="xSelect" name="x">
+                            <option value="" disabled selected>Выберите значение</option>
+                            <option value="-2">-2</option>
+                            <option value="-1.5">-1.5</option>
+                            <option value="-1">-1</option>
+                            <option value="-0.5">-0.5</option>
+                            <option value="0">0</option>
+                            <option value="0.5">0.5</option>
+                            <option value="1">1</option>
+                            <option value="1.5">1.5</option>
+                            <option value="2">2</option>
+                        </select>
+                        <div class="error-message" id="xError">Выберите значение X</div>
+                    </div>
+
+                    <!-- Параметр Y - Text input -->
+                    <div class="parameter-group">
+                        <label for="y" class="parameter-label">Координата Y:</label>
+                        <input type="text" id="y" name="y" placeholder="Введите Y от -3 до 5" required>
+                        <div class="error-message" id="yError">Y должен быть числом от -3 до 5</div>
+                    </div>
+
+                    <!-- Параметр R - Text input -->
+                    <div class="parameter-group">
+                        <label for="r" class="parameter-label">Радиус R:</label>
+                        <input type="text" id="r" name="r" placeholder="Введите R от 1 до 4" required>
+                        <div class="error-message" id="rError">R должен быть числом от 1 до 4</div>
+                    </div>
+
+                    <button type="submit" class="submit-btn" id="submitBtn">Проверить попадание</button>
+                </form>
+            </div>
+        </section>
+
+
+
+        <!-- Боковая колонка - история результатов -->
+<aside class="history-section">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px;">
+        <h2>История проверок</h2>
+        <button id="clearHistoryBtn" class="clear-btn" style="
+            background: linear-gradient(135deg, #6b35ff 0%, #8e53ff 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 10px 20px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(107, 53, 255, 0.3);
+            height: fit-content;
+        ">Очистить историю</button>
+    </div>
+    <div id="loading" style="display: none;">Загрузка...</div>
+    <div class="table-container">
+        <table class="results-table">
+            <thead>
+                <tr>
+                    <th>X</th>
+                    <th>Y</th>
+                    <th>R</th>
+                    <th>Результат</th>
+                    <th>Время</th>
+                </tr>
+            </thead>
+            <tbody id="resultsBody">
+                <!-- Результаты будут добавляться здесь через JavaScript -->
+                <tr>
+                    <td colspan="5" class="no-results">Нет данных</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</aside>
+    </div>
+
+    <!-- Футер -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>*Please stand by SSTH_Michi_Verse*</p>
+            <p>2025</p>
+        </div>
+    </footer>
+
+    <audio id="clearSound" preload="auto">
+        <source src="{{ url_for('static', filename='sounds/clear.mp3') }}" type="audio/mpeg">
+    </audio>
+
+    <!-- Подключение внешних скриптов -->
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <script src="https://cdn.plot.ly/plotly-2.27.0.min.js" charset="utf-8"></script>
+</body>
+</html>
