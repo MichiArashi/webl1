@@ -1,13 +1,11 @@
-import math
 from figure.point import Point
 from figure.figure import Figure
 
 
-class Circle(Figure):
+class Triangle(Figure):
     def __init__(self, radius: float):
         super().__init__()
         self.radius = radius
 
     def check_point(self, point: Point) -> bool:
-
-        return -point.x >= 0 >= point.y and math.hypot(point.x, point.y) <= self.radius/2
+        return -point.x <= 0 and 0 >= point.y >= point.x - self.radius/2
