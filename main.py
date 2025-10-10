@@ -23,16 +23,16 @@ def index():
     return render_template('index.html')
 
 
-@app.route('/api/check', methods=['GET'])
+@app.route('/api/check', methods=['POST'])
 def check_point():
     start_time = time.time()
 
     try:
-
-
-        x = float(request.args.get('x'))
-        y = float(request.args.get('y'))
-        r = float(request.args.get('r'))
+        # Получаем данные из JSON тела запроса
+        data = request.get_json()
+        x = float(data.get('x'))
+        y = float(data.get('y'))
+        r = float(data.get('r'))
 
         if r <= 0 or r > 4:
             return jsonify({'error': 'Invalid R. R must be between 1 and 4.'}), 400
@@ -63,6 +63,7 @@ def check_point():
 
     except (ValueError, TypeError):
         return jsonify({'error': 'Invalid input data. Please provide numbers.'}), 400
+
 
 @app.route('/api/clear-history', methods=['POST'])
 def clear_history():
