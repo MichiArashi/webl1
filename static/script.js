@@ -169,36 +169,42 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Обработчик отправки формы
     form.addEventListener('submit', function(event) {
-        event.preventDefault();
+    event.preventDefault();
 
-        const x = document.querySelector('#xSelect')?.value;
-        console.log(x)
-        const y = document.getElementById('y').value;
-        const r = document.getElementById('r').value;
+    const x = document.querySelector('#xSelect')?.value;
+    console.log(x)
+    const y = document.getElementById('y').value;
+    const r = document.getElementById('r').value;
 
-        if (!validateForm(x, y, r)) {
-            return;
+    if (!validateForm(x, y, r)) {
+        return;
+    }
+
+    // Отправка данных в формате JSON
+    fetch('/api/check', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ x, y, r })
+    })
+    .then(response => {
+        if (!response.ok) {
+            return response.json().then(err => { throw new Error(err.error) });
         }
-
-        const url = `/api/check?x=${x}&y=${y}&r=${r}`;
-
-        fetch(url)
-            .then(response => {
-                if (!response.ok) {
-                    return response.json().then(err => { throw new Error(err.error) });
-                }
-                return response.json();
-            })
-            .then(data => {
-                updateTable(data.history);
-                const lastItem = data.history[data.history.length - 1];
-                drawPlotAndPoint(lastItem.x, lastItem.y, lastItem.r);
-            })
-            .catch(error => {
-                console.error('Ошибка:', error);
-                alert("Ошибка: " + error.message);
-            });
+        return response.json();
+    })
+    .then(data => {
+        updateTable(data.history);
+        const lastItem = data.history[data.history.length - 1];
+        drawPlotAndPoint(lastItem.x, lastItem.y, lastItem.r);
+    })
+    .catch(error => {
+        console.error('Ошибка:', error);
+        alert("Ошибка: " + error.message);
     });
+});
+
 
     // Обработчик очистки истории
     clearHistoryBtn.addEventListener('click', function() {
