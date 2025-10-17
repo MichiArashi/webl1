@@ -1,11 +1,11 @@
-/* Сброс стилей и базовые настройки */
+/* Сброс стилей и базовые настройки - демонстрация каскадирования */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/* Наследование шрифта для всего документа */
+/* Наследование шрифта для всего документа - демонстрация наследования */
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     line-height: 1.6;
@@ -21,7 +21,7 @@ body {
     flex-direction: column;
 }
 
-/* Шапка с каскадными свойствами */
+/* Шапка с каскадными свойствами и наследованием шрифта */
 .header {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
@@ -31,7 +31,9 @@ body {
     box-shadow: 0 4px 20px rgba(255, 107, 53, 0.3);
 }
 
-.header h1 {
+/* Селектор потомков для заголовка в шапке */
+.header > h1 {
+    font-family: cursive !important; /* Явное задание шрифта как требуется */
     font-size: 36px;
     font-weight: 700;
     color: #ffffff;
@@ -40,19 +42,21 @@ body {
     letter-spacing: 1px;
 }
 
+/* Селектор классов для информации о студенте */
 .header .student-info {
+    font-family: cursive; /* Наследование курсивного шрифта */
     font-size: 16px;
     color: rgba(255, 255, 255, 0.9);
     font-weight: 300;
 }
 
-/* Основной контейнер */
+/* Основной контейнер с отступами в процентах */
 .container {
     max-width: 1400px;
     margin: 0 auto;
-    padding: 0 25px;
+    padding: 0 2%; /* Отступы в процентах */
     display: flex;
-    gap: 30px;
+    gap: 2%; /* Отступы в процентах */
     flex: 1;
 }
 
@@ -61,13 +65,13 @@ body {
     flex: 3;
     display: flex;
     flex-direction: column;
-    gap: 30px;
+    gap: 2%; /* Отступы в процентах */
 }
 
 /* Графический контейнер */
 .graph-container {
     background: rgba(40, 40, 40, 0.95);
-    padding: 30px;
+    padding: 2%; /* Отступы в процентах */
     border-radius: 15px;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
     text-align: center;
@@ -75,14 +79,8 @@ body {
     backdrop-filter: blur(10px);
 }
 
-.graph-container h2 {
-    color: #ff6b35;
-    margin-bottom: 25px;
-    font-size: 26px;
-    font-weight: 600;
-}
-
-.graph {
+/* Селектор идентификаторов для графика */
+#graph {
     width: 100%;
     max-width: 500px;
     height: 500px;
@@ -93,7 +91,8 @@ body {
     box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.5);
 }
 
-#external {
+/* Селектор атрибутов для внешнего контейнера графика */
+div[id="external"] {
     width: 100%;
     height: 100%;
     display: block;
@@ -103,35 +102,36 @@ body {
 /* Секция параметров */
 .parameters-section {
     background: rgba(40, 40, 40, 0.95);
-    padding: 30px;
+    padding: 2%; /* Отступы в процентах */
     border-radius: 15px;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
     border: 1px solid #404040;
     backdrop-filter: blur(10px);
 }
 
-.parameters-section h2 {
+/* Селекторы дочерних элементов для заголовков */
+.parameters-section > h2 {
     color: #ff6b35;
-    margin-bottom: 25px;
+    margin-bottom: 2%; /* Отступы в процентах */
     font-size: 26px;
     font-weight: 600;
 }
 
-/* Группы параметров */
+/* Группы параметров с отступами в процентах */
 .parameter-group {
-    margin-bottom: 30px;
+    margin-bottom: 3%; /* Отступы в процентах */
 }
 
 .parameter-label {
     display: block;
-    margin-bottom: 12px;
+    margin-bottom: 2%; /* Отступы в процентах */
     font-weight: 600;
     color: #ff6b35;
     font-size: 16px;
     letter-spacing: 0.5px;
 }
 
-/* Стили для select элемента координаты X */
+/* Стили для select элемента координаты X - селектор идентификаторов */
 #xSelect {
     width: 100%;
     max-width: 300px;
@@ -151,40 +151,8 @@ body {
     cursor: pointer;
 }
 
-#xSelect:focus {
-    border-color: #ff6b35;
-    outline: none;
-    box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.2);
-    background-color: rgba(60, 60, 60, 0.9);
-}
-
-#xSelect:hover {
-    border-color: #ff6b35;
-    background-color: rgba(60, 60, 60, 0.9);
-}
-
-#xSelect:invalid {
-    border-color: #e74c3c;
-}
-
-#xSelect:valid {
-    border-color: #27ae60;
-}
-
-/* Стили для опций */
-#xSelect option {
-    background: rgba(50, 50, 50, 0.95);
-    color: #e0e0e0;
-    padding: 10px;
-}
-
-#xSelect option:checked {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
-}
-
-/* Стили для текстового поля Y */
-#y {
+/* Селектор атрибутов для состояний полей ввода */
+input[type="text"], select {
     width: 100%;
     max-width: 300px;
     padding: 14px;
@@ -196,23 +164,26 @@ body {
     color: #e0e0e0;
 }
 
-#y:focus {
+/* Селектор атрибутов для фокуса */
+input[type="text"]:focus, select:focus {
     border-color: #ff6b35;
     outline: none;
     box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.2);
     background: rgba(60, 60, 60, 0.9);
 }
 
-#y:invalid {
+/* Селектор атрибутов для невалидных полей */
+input[type="text"]:invalid, select:invalid {
     border-color: #e74c3c;
 }
 
-#y:valid {
+/* Селектор атрибутов для валидных полей */
+input[type="text"]:valid, select:valid {
     border-color: #27ae60;
 }
 
-/* Стили для текстового поля R */
-#r {
+/* Специфические стили для Y и R через селекторы идентификаторов */
+#y, #r {
     width: 100%;
     max-width: 300px;
     padding: 14px;
@@ -222,25 +193,6 @@ body {
     background: rgba(50, 50, 50, 0.8);
     color: #e0e0e0;
     transition: all 0.3s ease;
-    appearance: none;
-    background-position: right 12px center;
-    background-size: 16px;
-    padding-right: 40px;
-}
-
-#r:focus {
-    border-color: #ff6b35;
-    outline: none;
-    box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.2);
-    background-color: rgba(60, 60, 60, 0.9);
-}
-
-#r:invalid {
-    border-color: #e74c3c;
-}
-
-#r:valid {
-    border-color: #27ae60;
 }
 
 /* Кнопка отправки */
@@ -260,6 +212,7 @@ body {
     box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
 }
 
+/* Псевдоклассы для кнопки - демонстрация каскадирования */
 .submit-btn:hover {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     box-shadow: 0 6px 20px rgba(255, 107, 53, 0.4);
@@ -283,7 +236,7 @@ body {
     flex: 1;
     min-width: 350px;
     background: rgba(40, 40, 40, 0.95);
-    padding: 30px;
+    padding: 2%; /* Отступы в процентах */
     border-radius: 15px;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
     height: fit-content;
@@ -291,11 +244,27 @@ body {
     backdrop-filter: blur(10px);
 }
 
-.history-section h2 {
-    color: #ff6b35;
-    margin-bottom: 25px;
-    font-size: 26px;
+/* Селектор дочерних элементов для контейнера заголовка истории */
+.history-section > div:first-child {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2%; /* Отступы в процентах */
+}
+
+/* Селектор идентификаторов для кнопки очистки */
+#clearHistoryBtn {
+    background: linear-gradient(135deg, #6b35ff 0%, #8e53ff 100%);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
     font-weight: 600;
+    box-shadow: 0 4px 15px rgba(107, 53, 255, 0.3);
+    height: fit-content;
 }
 
 .table-container {
@@ -308,9 +277,10 @@ body {
 .results-table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 10px;
+    margin-top: 2%; /* Отступы в процентах */
 }
 
+/* Селектор потомков для ячеек таблицы */
 .results-table th {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
@@ -329,7 +299,7 @@ body {
     background: rgba(45, 45, 45, 0.8);
 }
 
-/* Селектор потомков для чередования строк */
+/* Селектор потомков для чередования строк - демонстрация каскадирования */
 .results-table tbody tr:nth-child(even) {
     background-color: rgba(50, 50, 50, 0.6);
 }
@@ -340,18 +310,19 @@ body {
     transition: all 0.2s ease;
 }
 
+/* Селектор классов для сообщения об отсутствии результатов */
 .no-results {
     text-align: center;
     color: #888;
     font-style: italic;
-    padding: 30px;
+    padding: 5%; /* Отступы в процентах */
 }
 
-/* Сообщения об ошибках */
+/* Сообщения об ошибках - селектор классов */
 .error-message {
     color: #ff6b6b;
     font-size: 14px;
-    margin-top: 8px;
+    margin-top: 2%; /* Отступы в процентах */
     display: none;
     font-weight: 500;
 }
@@ -360,33 +331,47 @@ body {
 .footer {
     background: rgba(20, 20, 20, 0.95);
     color: white;
-    padding: 25px 0;
+    padding: 2% 0; /* Отступы в процентах */
     text-align: center;
-    margin-top: 40px;
+    margin-top: 3%; /* Отступы в процентах */
     border-top: 1px solid #404040;
     backdrop-filter: blur(10px);
 }
 
-.footer-content p {
-    margin: 8px 0;
+/* Селектор потомков для параграфов в футере */
+.footer-content > p {
+    margin: 1% 0; /* Отступы в процентах */
     color: #aaa;
     font-size: 14px;
 }
 
+/* Селектор псевдоклассов для первого параграфа */
 .footer-content p:first-child {
     font-style: italic;
     color: #ff6b35;
 }
 
-/* Адаптивность */
+/* Дополнительные селекторы атрибутов для демонстрации */
+input[placeholder] {
+    font-style: italic;
+    color: #999;
+}
+
+input[required] {
+    border-left: 3px solid #ff6b35;
+}
+
+/* Адаптивность с отступами в процентах */
 @media (max-width: 1024px) {
     .container {
         flex-direction: column;
+        gap: 1%; /* Отступы в процентах */
     }
 
     .history-section {
         min-width: 100%;
         order: -1;
+        margin-bottom: 2%; /* Отступы в процентах */
     }
 }
 
@@ -397,6 +382,10 @@ body {
 
     .header h1 {
         font-size: 28px;
+    }
+
+    .container {
+        padding: 0 1%; /* Отступы в процентах */
     }
 }
 
@@ -414,12 +403,17 @@ body {
     }
 
     .container {
-        padding: 0 15px;
+        padding: 0 1%; /* Отступы в процентах */
     }
 
     .graph-container,
     .parameters-section,
     .history-section {
-        padding: 20px;
+        padding: 3%; /* Отступы в процентах */
+    }
+
+    /* Селектор дочерних элементов для мобильных */
+    .header > h1 {
+        font-size: 22px;
     }
 }
