@@ -36,7 +36,8 @@ def check_point():
 
         if r <= 0 or r > 4:
             return jsonify({'error': 'Invalid R. R must be between 1 and 4.'}), 400
-
+        if y < -3 or y > 5:
+            return jsonify({'error': 'Invalid Y. Y must be between -3 and 5.'}), 400
         valid_x = [-2, -1.5, -1, -0.5, 0, 0.5, 1, 1.5, 2]
         if x not in valid_x:
             return jsonify({'error': 'Invalid X value.'}), 400
